@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.kotlinxSerialization)
 }
 
 android {
@@ -60,6 +61,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation)
+    implementation(libs.kotlinx.serialization)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
