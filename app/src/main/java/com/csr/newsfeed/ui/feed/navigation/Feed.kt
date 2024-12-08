@@ -1,3 +1,6 @@
 package com.csr.newsfeed.ui.feed.navigation
 
-data class Feed()
+import kotlinx.serialization.Serializable
+
+@Serializable
+object Feed
