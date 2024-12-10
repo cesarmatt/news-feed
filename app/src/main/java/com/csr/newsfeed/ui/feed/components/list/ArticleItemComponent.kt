@@ -1,9 +1,7 @@
 package com.csr.newsfeed.ui.feed.components.list
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -19,9 +17,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import coil3.compose.AsyncImage
 import com.csr.newsfeed.data.Article
 
 @Composable
@@ -37,11 +38,11 @@ fun ArticleItemComponent(
             .clickable { onClick(article.url.orEmpty()) },
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Box(
-            modifier = modifier
-                .fillMaxHeight()
-                .width(80.dp)
-                .background(Color.Blue)
+        AsyncImage(
+            modifier = modifier.fillMaxHeight().width(80.dp),
+            model = article.urlToImage,
+            contentScale = ContentScale.Crop,
+            contentDescription = "Article image for ${article.title}"
         )
         Spacer(modifier = modifier.width(8.dp))
         Column(
@@ -50,7 +51,10 @@ fun ArticleItemComponent(
         ) {
             Text(
                 text = article.title.orEmpty(),
-                style = MaterialTheme.typography.bodyLarge
+                style = MaterialTheme.typography.bodyLarge,
+                maxLines = 2,
+                lineHeight = 18.sp,
+                overflow = TextOverflow.Ellipsis
             )
             Text(
                 text = article.publishedAt.orEmpty(),
@@ -59,6 +63,7 @@ fun ArticleItemComponent(
         }
         Icon(
             imageVector = Icons.Default.KeyboardArrowRight,
+            tint = MaterialTheme.colorScheme.primary,
             contentDescription = "Enter ${article.title} content"
         )
     }
@@ -68,7 +73,7 @@ fun ArticleItemComponent(
 @Composable
 fun ArticleItemPreview(modifier: Modifier = Modifier) {
     val article = Article(
-        title = "Title",
+        title = "Long title to fill the space for new line to see how overflow behaves",
         publishedAt = "December 8th, 2024"
     )
     ArticleItemComponent(
