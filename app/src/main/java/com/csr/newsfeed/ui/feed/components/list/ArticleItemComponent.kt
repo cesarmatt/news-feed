@@ -1,14 +1,19 @@
 package com.csr.newsfeed.ui.feed.components.list
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Icon
@@ -23,45 +28,67 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
-import com.csr.newsfeed.data.Article
+import com.csr.newsfeed.ui.feed.data.ArticleListViewObject
 
 @Composable
-fun ArticleItemComponent(
+fun ArticleItemComponentHoisting(
+    article: ArticleListViewObject,
+    onClick: (String) -> Unit,
+) {
+    ArticleItemComponent(
+        article = article,
+        onClick = onClick
+    )
+}
+
+@Composable
+private fun ArticleItemComponent(
     modifier: Modifier = Modifier,
-    article: Article,
+    article: ArticleListViewObject,
     onClick: (String) -> Unit,
 ) {
     Row(
         modifier = modifier
-            .height(60.dp)
+            .height(80.dp)
             .fillMaxWidth()
+            .border(
+                width = 1.dp,
+                color = MaterialTheme.colorScheme.primary,
+                shape = RoundedCornerShape(10)
+            )
             .clickable { onClick(article.url.orEmpty()) },
         verticalAlignment = Alignment.CenterVertically
     ) {
         AsyncImage(
-            modifier = modifier.fillMaxHeight().width(80.dp),
-            model = article.urlToImage,
+            modifier = modifier
+                .fillMaxHeight()
+                .width(80.dp)
+                .padding(8.dp),
+            model = article.imageUrl,
             contentScale = ContentScale.Crop,
             contentDescription = "Article image for ${article.title}"
         )
-        Spacer(modifier = modifier.width(8.dp))
         Column(
-            modifier = modifier.fillMaxHeight().weight(1f),
+            modifier = modifier
+                .fillMaxHeight()
+                .weight(1f),
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = article.title.orEmpty(),
+                text = article.title,
                 style = MaterialTheme.typography.bodyLarge,
                 maxLines = 2,
-                lineHeight = 18.sp,
+                lineHeight = 14.sp,
                 overflow = TextOverflow.Ellipsis
             )
+            Spacer(modifier = modifier.height(8.dp))
             Text(
-                text = article.publishedAt.orEmpty(),
+                text = article.date,
                 style = MaterialTheme.typography.bodySmall
             )
         }
         Icon(
+            modifier = modifier.padding(horizontal = 8.dp),
             imageVector = Icons.Default.KeyboardArrowRight,
             tint = MaterialTheme.colorScheme.primary,
             contentDescription = "Enter ${article.title} content"
@@ -72,9 +99,10 @@ fun ArticleItemComponent(
 @Preview(showBackground = true)
 @Composable
 fun ArticleItemPreview(modifier: Modifier = Modifier) {
-    val article = Article(
+    val article = ArticleListViewObject(
         title = "Long title to fill the space for new line to see how overflow behaves",
-        publishedAt = "December 8th, 2024"
+        date = "December 8th, 2024",
+        uuid = "1234567890"
     )
     ArticleItemComponent(
         article = article,
