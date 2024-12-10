@@ -12,17 +12,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.csr.newsfeed.data.Article
 import com.csr.newsfeed.ui.feed.components.headline.FeedHeadlineComponent
 import com.csr.newsfeed.ui.feed.components.list.ArticlesListComponent
+import com.csr.newsfeed.ui.feed.data.FeedUIState
 
 @Composable
 fun FeedScreenHoisting(viewModel: FeedViewModel) {
-    val feedItems = viewModel.feedItems.collectAsLazyPagingItems()
+    val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     FeedScreen(
-        articles = feedItems,
+        uiState = uiState.value,
         source = viewModel.source.displayValue
     )
 }
@@ -30,7 +32,7 @@ fun FeedScreenHoisting(viewModel: FeedViewModel) {
 @Composable
 private fun FeedScreen(
     modifier: Modifier = Modifier,
-    articles: LazyPagingItems<Article>,
+    uiState: FeedUIState,
     source: String,
 ) {
     Scaffold { internalPadding ->
@@ -38,7 +40,7 @@ private fun FeedScreen(
             Column(modifier = modifier.padding(horizontal = 16.dp)) {
                 FeedHeadlineComponent(source = source)
                 Spacer(modifier = modifier.height(16.dp))
-                ArticlesListComponent(articles = articles)
+                ArticlesListComponent(uiState = uiState)
             }
         }
     }
