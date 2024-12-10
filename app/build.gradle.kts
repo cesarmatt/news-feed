@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.kotlinxSerialization)
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 android {
@@ -63,6 +64,14 @@ dependencies {
     implementation(libs.androidx.navigation)
     implementation(libs.kotlinx.serialization)
     implementation(libs.koin)
+    implementation(libs.koin.compose)
+    implementation(libs.paging.runtime)
+    implementation(libs.paging.compose)
+    implementation(libs.retrofit)
+    implementation(libs.gson.converter.factory)
+    implementation(libs.logging.interceptor)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
