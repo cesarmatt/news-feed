@@ -3,7 +3,6 @@ package com.csr.newsfeed.ui.feed.components.list
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
@@ -28,12 +26,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import com.csr.newsfeed.ui.detail.data.HeadlineDetailViewObject
+import com.csr.newsfeed.ui.detail.route.Detail
 import com.csr.newsfeed.ui.feed.data.ArticleListViewObject
 
 @Composable
 fun ArticleItemComponentHoisting(
     article: ArticleListViewObject,
-    onClick: (String) -> Unit,
+    onClick: (Detail) -> Unit,
 ) {
     ArticleItemComponent(
         article = article,
@@ -45,7 +45,7 @@ fun ArticleItemComponentHoisting(
 private fun ArticleItemComponent(
     modifier: Modifier = Modifier,
     article: ArticleListViewObject,
-    onClick: (String) -> Unit,
+    onClick: (Detail) -> Unit,
 ) {
     Row(
         modifier = modifier
@@ -56,7 +56,16 @@ private fun ArticleItemComponent(
                 color = MaterialTheme.colorScheme.primary,
                 shape = RoundedCornerShape(10)
             )
-            .clickable { onClick(article.url.orEmpty()) },
+            .clickable {
+                onClick(
+                    Detail(
+                        imageUrl = article.imageUrl,
+                        title = article.title,
+                        description = article.content.orEmpty(),
+                        content = article.content.orEmpty()
+                    )
+                )
+            },
         verticalAlignment = Alignment.CenterVertically
     ) {
         AsyncImage(
@@ -78,7 +87,7 @@ private fun ArticleItemComponent(
                 text = article.title,
                 style = MaterialTheme.typography.bodyLarge,
                 maxLines = 2,
-                lineHeight = 14.sp,
+                lineHeight = 18.sp,
                 overflow = TextOverflow.Ellipsis
             )
             Spacer(modifier = modifier.height(8.dp))

@@ -6,4 +6,5 @@ data class ArticleListViewObject(
     val date: String,
     val imageUrl: String? = null,
     val url: String? = null,
+    val content: String? = null,
 )
