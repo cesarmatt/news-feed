@@ -1,6 +1,8 @@
 package com.csr.newsfeed.ui.detail
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -15,6 +17,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil3.compose.AsyncImage
 import com.csr.newsfeed.ui.detail.data.HeadlineDetailViewObject
@@ -58,10 +61,16 @@ private fun HeadlineDetailScreen(
         }
     ) { internalPadding ->
         Surface(modifier = modifier.padding(internalPadding)) {
-            Column {
-                Text(text = viewObject.title, style = MaterialTheme.typography.headlineMedium)
+            Column(modifier = modifier.padding(16.dp)) {
+                Text(
+                    text = viewObject.title,
+                    style = MaterialTheme.typography.headlineMedium
+                )
+                Spacer(modifier = modifier.height(8.dp))
                 Text(text = viewObject.description)
+                Spacer(modifier = modifier.height(8.dp))
                 AsyncImage(model = viewObject.imageUrl, contentDescription = null)
+                Spacer(modifier = modifier.height(8.dp))
                 Text(text = viewObject.content)
             }
         }

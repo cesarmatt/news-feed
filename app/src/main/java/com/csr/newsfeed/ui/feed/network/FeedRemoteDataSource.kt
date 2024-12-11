@@ -39,7 +39,8 @@ class FeedRemoteDataSource(
                 date = it.publishedAt?.formatTimestampToDate().orEmpty(),
                 imageUrl = it.urlToImage,
                 url = it.url,
-                content = it.content
+                description = it.description,
+                content = it.content?.substringBefore("[")
             )
         }
     }
