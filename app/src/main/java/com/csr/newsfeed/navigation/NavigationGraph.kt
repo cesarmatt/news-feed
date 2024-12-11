@@ -34,6 +34,7 @@ fun NavigationGraph(navHostController: NavHostController) {
                         title = args.title,
                         description = args.description,
                         content = args.content,
+                        date = args.date
                     )
                 )
             }

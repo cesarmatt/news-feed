@@ -62,7 +62,8 @@ private fun ArticleItemComponent(
                         imageUrl = article.imageUrl,
                         title = article.title,
                         description = article.description.orEmpty(),
-                        content = article.content.orEmpty()
+                        content = article.content.orEmpty(),
+                        date = article.date
                     )
                 )
             },

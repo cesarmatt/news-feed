@@ -67,11 +67,22 @@ private fun HeadlineDetailScreen(
                     style = MaterialTheme.typography.headlineMedium
                 )
                 Spacer(modifier = modifier.height(8.dp))
-                Text(text = viewObject.description)
+                Text(
+                    text = viewObject.description,
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+                Spacer(modifier = modifier.height(8.dp))
+                Text(
+                    text = viewObject.date,
+                    style = MaterialTheme.typography.bodySmall
+                )
                 Spacer(modifier = modifier.height(8.dp))
                 AsyncImage(model = viewObject.imageUrl, contentDescription = null)
                 Spacer(modifier = modifier.height(8.dp))
-                Text(text = viewObject.content)
+                Text(
+                    text = viewObject.content,
+                    style = MaterialTheme.typography.bodyLarge
+                )
             }
         }
     }
@@ -85,6 +96,7 @@ fun HeadlineDetailScreenPreview() {
         title = "Porto Alegre - best city in the world",
         description = "The capital of Rio Grande do Sul is the best city ever",
         content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mi augue, consequat sed libero sit amet, maximus consectetur arcu. Phasellus tincidunt volutpat eros, sit amet condimentum nisl interdum vel. Nullam sit amet metus in metus sagittis pulvinar. Integer mauris lorem, efficitur vitae elit ac, gravida tristique purus. Ut maximus consequat odio in aliquam. Vivamus semper, erat sed vestibulum efficitur, eros nibh commodo enim, ut vulputate massa nisi nec metus. Sed venenatis aliquam congue.",
+        date = "December 11th, 2024"
     )
     HeadlineDetailScreen(viewObject = viewObject) { }
 }

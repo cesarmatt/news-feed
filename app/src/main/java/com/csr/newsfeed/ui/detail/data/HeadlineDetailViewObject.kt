@@ -7,5 +7,6 @@ data class HeadlineDetailViewObject(
     val imageUrl: String?,
     val title: String,
     val description: String,
-    val content: String
+    val content: String,
+    val date: String,
 )
