@@ -2,6 +2,7 @@ package com.csr.newsfeed
 
 import android.app.Application
 import com.csr.newsfeed.di.networkModule
+import com.csr.newsfeed.ui.detail.di.headlineDetailModule
 import com.csr.newsfeed.ui.feed.di.feedModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -17,7 +18,8 @@ class NewsFeedApplication : Application() {
             androidContext(this@NewsFeedApplication)
             modules(
                 networkModule,
-                feedModule
+                feedModule,
+                headlineDetailModule
             )
         }
     }
