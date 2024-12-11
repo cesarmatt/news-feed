@@ -1,4 +1,4 @@
-package com.csr.newsfeed.ui.feed.navigation
+package com.csr.newsfeed.ui.feed.route
 
 import kotlinx.serialization.Serializable
 
