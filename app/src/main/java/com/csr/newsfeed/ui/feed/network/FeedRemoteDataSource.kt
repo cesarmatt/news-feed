@@ -1,7 +1,7 @@
 package com.csr.newsfeed.ui.feed.network
 
 import com.csr.newsfeed.data.Article
-import com.csr.newsfeed.ext.formatTimestampToDate
+import com.csr.newsfeed.formatter.StringFormatTimestamp
 import com.csr.newsfeed.network.DefaultDispatcherProvider
 import com.csr.newsfeed.network.DispatcherProvider
 import kotlinx.coroutines.withContext
@@ -11,7 +11,8 @@ import okio.IOException
 
 class FeedRemoteDataSource(
     private val service: FeedService,
-    private val dispatchers: DispatcherProvider = DefaultDispatcherProvider()
+    private val dispatchers: DispatcherProvider = DefaultDispatcherProvider(),
+    private val timestampFormatter: StringFormatTimestamp = StringFormatTimestamp()
 ) {
 
     suspend fun fetchArticles(sources: String): Result<List<ArticleListViewObject>> = withContext(dispatchers.io()) {
@@ -36,7 +37,7 @@ class FeedRemoteDataSource(
             ArticleListViewObject(
                 uuid = it.uuid,
                 title = it.title.orEmpty(),
-                date = it.publishedAt?.formatTimestampToDate().orEmpty(),
+                date = timestampFormatter.formatTimestampToDate(it.publishedAt.orEmpty()),
                 imageUrl = it.urlToImage,
                 url = it.url,
                 description = it.description,

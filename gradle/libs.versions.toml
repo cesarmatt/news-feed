@@ -16,6 +16,8 @@ retrofit = "2.11.0"
 gson = "2.11.0"
 okhttp = "4.11.0"
 coil = "3.0.4"
+mockk = "1.13.13"
+androidxArchCoreTesting = "2.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -43,6 +45,9 @@ gson-converter-factory = { group = "com.squareup.retrofit2", name = "converter-g
 logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
 coil-network = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlin" }
+androidx-core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "androidxArchCoreTesting" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
